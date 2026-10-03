@@ -1,0 +1,41 @@
+{
+  "author": "Payload <kylers.partners@gmail.com> (https://payloadhq.github.io/)",
+  "bin": {
+    "x402-manifest-check": "./bin/x402-manifest-check.js"
+  },
+  "bugs": {
+    "url": "https://github.com/Payloadhq/x402-manifest-check/issues"
+  },
+  "description": "Validate an x402 payment manifest (/.well-known/x402): required endpoint fields, sane values, and optional live 402 probe. Zero dependencies.",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/Payloadhq/x402-manifest-check#readme",
+  "keywords": [
+    "x402",
+    "402",
+    "payment",
+    "manifest",
+    "usdc",
+    "api-monetization",
+    "ai-agents",
+    "cli",
+    "validator"
+  ],
+  "license": "MIT",
+  "name": "x402-manifest-check",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Payloadhq/x402-manifest-check.git"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.js\""
+  },
+  "version": "1.0.0"
+}
