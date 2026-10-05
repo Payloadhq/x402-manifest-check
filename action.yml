@@ -1,8 +1,9 @@
 name: 'x402 Manifest Check'
 description: >-
-  Validate an x402 payment manifest (/.well-known/x402): required endpoint
-  fields, sane values, and an optional live 402 probe. Fails the build on
-  validation errors. Zero dependencies, Node 18+.
+  Your paid API is invisible to machines if its x402 manifest is broken.
+  Validates /.well-known/x402 (required fields, sane prices, v1/v2
+  correctness) and probes the live 402 challenge. Fails the build on
+  errors. Zero dependencies, Node 18+.
 author: 'Payload'
 branding:
   icon: 'dollar-sign'
