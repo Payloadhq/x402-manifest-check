@@ -1,0 +1,40 @@
+name: 'x402 Manifest Check'
+description: >-
+  Validate an x402 payment manifest (/.well-known/x402): required endpoint
+  fields, sane values, and an optional live 402 probe. Fails the build on
+  validation errors. Zero dependencies, Node 18+.
+author: 'Payload'
+branding:
+  icon: 'dollar-sign'
+  color: 'green'
+
+inputs:
+  url:
+    description: 'Base URL of the API to check, e.g. https://api.example.com'
+    required: true
+  endpoint:
+    description: >-
+      One manifest endpoint path to probe, e.g. /api/data.
+      Defaults to the first endpoint listed in the manifest.
+    required: false
+    default: ''
+  probe:
+    description: "Make an unpaid request to the endpoint and validate the live 402 challenge ('true' or 'false')."
+    required: false
+    default: 'true'
+  json:
+    description: "Emit the full machine-readable report to the step summary ('true' or 'false')."
+    required: false
+    default: 'false'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run x402 manifest check
+      shell: bash
+      run: |
+        ARGS=("${{ inputs.url }}")
+        if [ "${{ inputs.probe }}" = "true" ]; then ARGS+=(--probe); fi
+        if [ -n "${{ inputs.endpoint }}" ]; then ARGS+=(--endpoint "${{ inputs.endpoint }}"); fi
+        if [ "${{ inputs.json }}" = "true" ]; then ARGS+=(--json); fi
+        node "${{ github.action_path }}/bin/x402-manifest-check.js" "${ARGS[@]}"

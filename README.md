@@ -35,6 +35,30 @@ x402-manifest-check --help
 
 Exit codes: `0` = pass (or no manifest found — informational), `1` = validation failures, `2` = usage or network error. CI-friendly: fail the build on `1`.
 
+## GitHub Action
+
+Check your x402 manifest on every deploy. Add to any workflow:
+
+```yaml
+- uses: payloadhq/x402-manifest-check@v1
+  with:
+    url: https://api.example.com
+```
+
+With options:
+
+```yaml
+- uses: payloadhq/x402-manifest-check@v1
+  with:
+    url: https://api.example.com
+    endpoint: /api/data   # probe one endpoint (default: first in manifest)
+    probe: 'true'         # validate the live 402 challenge (default true)
+```
+
+The step fails when the manifest is invalid or the live 402 challenge is
+broken — malformed challenges, wrong network, or manifest drift get caught
+before production.
+
 ## Example
 
 ```bash

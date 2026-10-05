@@ -132,6 +132,18 @@ function handlerFor(mode) {
           }];
           return send(200, {}, m);
         }
+        case 'probev2symbol': {
+          // Real-world rail shape: endpoints manifest with symbol asset + short
+          // network, 402 with contract asset + CAIP-2 network + base-unit amount.
+          return send(200, {}, {
+            name: 'Symbol Fixture',
+            description: 'Manifest uses USDC/base; 402 uses contract/eip155:8453.',
+            baseUrl: 'http://127.0.0.1',
+            endpoints: [
+              { method: 'POST', path: '/api/paid', price: '0.01', asset: 'USDC', network: 'base', description: 'A paid thing.' },
+            ],
+          });
+        }
         case 'badjson':
           return send(200, {}, '{not json');
         case 'html':
@@ -187,6 +199,24 @@ function handlerFor(mode) {
     // manifest-only fixture: /api/paid exists but doesn't challenge (wrong)
     if (mode === 'good' && url === '/api/paid') {
       return send(200, {}, { ok: true });
+    }
+    // symbol-manifest vs contract-402: no drift when they describe the same token/network
+    if (mode === 'probev2symbol' && url === '/api/paid') {
+      const envelope = {
+        x402Version: 2,
+        resource: { url: 'http://127.0.0.1/api/paid', description: 'symbol fixture', mimeType: 'application/json' },
+        accepts: [{
+          scheme: 'exact',
+          network: 'eip155:8453',
+          asset: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+          amount: '10000',
+          payTo: '0x68614873C5d624c07DCAA3aFF5243DD5027c3910',
+          maxTimeoutSeconds: 300,
+          extra: { name: 'USDC', version: '2' },
+          id: 'symbolfixture1',
+        }],
+      };
+      return send(402, { 'payment-required': Buffer.from(JSON.stringify(envelope), 'utf8').toString('base64') }, envelope);
     }
 
     return send(404, {}, { error: 'not found' });

@@ -13,7 +13,7 @@ const { run } = require('../lib/check');
 
 const BIN = path.join(__dirname, '..', 'bin', 'x402-manifest-check.js');
 
-const MODES = ['good', 'broken', 'badjson', 'empty', 'html', 'v2', 'probe', 'probedrift', 'probeplaceholder', 'probenoexpiry', 'probev2'];
+const MODES = ['good', 'broken', 'badjson', 'empty', 'html', 'v2', 'probe', 'probedrift', 'probeplaceholder', 'probenoexpiry', 'probev2', 'probev2symbol'];
 const servers = {};
 const bases = {};
 
@@ -155,6 +155,13 @@ describe('probe validation', () => {
     // v2 expiry (maxTimeoutSeconds) and id-as-nonce recognized
     assert.ok(!report.warnings.some((w) => w.code === 'probe-no-expiry'));
     assert.ok(!report.warnings.some((w) => w.code === 'probe-no-nonce'));
+  });
+
+  it('treats symbol manifest + contract 402 as the same token/network (no drift)', async () => {
+    const { report, exitCode } = await run(bases.probev2symbol, { probe: true });
+    assert.equal(exitCode, 0, JSON.stringify(report.errors));
+    assert.ok(!report.errors.some((e) => e.code === 'probe-manifest-drift'),
+      'manifest USDC/base/0.01 matches 402 contract/eip155:8453/10000');
   });
 });
 
