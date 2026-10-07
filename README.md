@@ -15,14 +15,18 @@ v2 envelope with `accepts[]`, base-unit amounts, CAIP-2 networks, and
 
 ## Install
 
+The CLI is not published to npm. Install it from GitHub:
+
 ```bash
-npx x402-manifest-check <url>
+npm install -g github:Payloadhq/x402-manifest-check
 ```
 
-No install needed: `npx` fetches it on demand. Or install globally:
+Or run it from a checkout, no install needed:
 
 ```bash
-npm install -g x402-manifest-check
+git clone https://github.com/Payloadhq/x402-manifest-check.git
+cd x402-manifest-check
+node bin/x402-manifest-check.js https://api.example.com
 ```
 
 ## Usage
