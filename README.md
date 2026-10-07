@@ -116,3 +116,9 @@ Built by [Payload](https://payloadhq.github.io/).
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+---
+
+**More from Payload** · [payloadhq.github.io](https://payloadhq.github.io/) · [all Payload repos](https://github.com/Payloadhq)
+
+Related: [x402-failure-mode-benchmark](https://github.com/Payloadhq/x402-failure-mode-benchmark) · [x402-observatory](https://github.com/Payloadhq/x402-observatory) · [callx402](https://github.com/Payloadhq/callx402)
