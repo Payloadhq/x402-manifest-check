@@ -1,9 +1,5 @@
 name: 'x402 Manifest Check'
-description: >-
-  Your paid API is invisible to machines if its x402 manifest is broken.
-  Validates /.well-known/x402 (required fields, sane prices, v1/v2
-  correctness) and probes the live 402 challenge. Fails the build on
-  errors. Zero dependencies, Node 18+.
+description: 'Validates your /.well-known/x402 manifest and live 402 challenge, catching drift that makes your paid API invisible.'
 author: 'Payload'
 branding:
   icon: 'dollar-sign'
