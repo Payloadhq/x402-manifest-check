@@ -104,8 +104,12 @@ e.g. `10000` micro-USDC = `$0.01`).
 
 ## When the check finds real problems
 
-- **Manifest broken in production:** callx402 by Payload — powered by Veyline
-  diagnoses and rescues broken x402 calls. When x402 breaks, callx402.
+- **Manifest broken in production:** [callx402 by Payload](https://github.com/Payloadhq/callx402),
+  powered by Veyline, diagnoses x402 payment failures and explains what went
+  wrong. Its local tools are free and read only; hosted diagnostic actions are
+  paid per action, with a free quote first. Install it from
+  [npm](https://www.npmjs.com/package/callx402) (`npm install -g callx402`);
+  product overview on [payloadhq.github.io](https://payloadhq.github.io/).
 - **Implementation to build against:** the
   [Veyline Developer Primer](https://payloadtools.gumroad.com/l/x402-paid-api-starter-kit)
   (formerly the x402 Paid API Starter Kit, $79): Express middleware, manifest
